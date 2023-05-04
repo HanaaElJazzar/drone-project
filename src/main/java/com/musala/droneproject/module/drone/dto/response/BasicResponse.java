@@ -3,10 +3,11 @@ package com.musala.droneproject.module.drone.dto.response;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Setter @Getter
-public class BasicResponse<T> {
+public class BasicResponse<T> implements Serializable {
     private boolean success;
     private String message;
     private T data;
