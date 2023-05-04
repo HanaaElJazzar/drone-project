@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.event.annotation.PrepareTestInstance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,4 +76,25 @@ public class DroneServiceTest {
         Assertions.assertTrue(responseDrones.stream().allMatch(d -> d.getState() == DroneState.IDLE));
     }
 
+    /*
+        Test getBatteryCapacity Service
+        Added By: Hanaa ElJazzar
+        Date: 04/05/2023
+     */
+    @Test
+    public void testGetBatteryCapacity(){
+        Drone drone = new Drone("1234", DroneModel.Middleweight, 400.0, 90.0, DroneState.IDLE);
+
+        //Mock Response of Repository
+        when(droneRepository.findDroneBySerialNumber("1234")).thenReturn(drone);
+
+        //Call getBatteryCapacityService
+        Double actualBatteryCap = droneService.getBatteryCapacity("1234");
+
+        //Verify the call of droneRepository.findDroneBySerialNumber(serialNumber) once
+        verify(droneRepository, times(1)).findDroneBySerialNumber("1234");
+
+        //Assert Results returned
+        Assertions.assertEquals(drone.getBatteryCapacity(), actualBatteryCap);
+    }
 }
