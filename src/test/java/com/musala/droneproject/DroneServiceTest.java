@@ -8,35 +8,33 @@ import com.musala.droneproject.module.drone.service.DroneService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import static org.mockito.Mockito.*;
+
 /*
     Created by: Hanaa ElJazzar
     Created on: 03/05/2023
-    This will create DroneControllerTest That will test Controller Apis created to manage drones loading
+    This will create DroneServiceTest That will test Service methods created to manage drones
  */
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 public class DroneServiceTest {
-//    @InjectMocks
+
     @Autowired
     private DroneService droneService;
 
-//    @Mock
     @MockBean
     private DroneRepository droneRepository;
 
     @Test
     public void testSaveDrone() {
         // create a new drone object
-        Drone drone = new Drone("1234", DroneModel.Middleweight, 400, 90.0, DroneState.IDLE);
+        Drone drone = new Drone("1234", DroneModel.Middleweight, 400.0, 90.0, DroneState.IDLE);
 
         // specify the behavior of the mock repository
         when(droneRepository.save(drone)).thenReturn(drone);
