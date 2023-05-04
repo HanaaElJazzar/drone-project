@@ -40,7 +40,7 @@ public class Drone {
 //    @Min(0)
     @Min(value=1, message = "Weight limit must be at least 1 grams")
     @Max(value=500, message = "Weight limit cannot exceed 500 grams")
-    private Integer weightLimit;
+    private Double weightLimit;
 
     @Min(value = 0, message = "Battery capacity must be at least 0%")
     @Max(value=100, message = "Battery capacity cannot exceed 100%")
@@ -53,7 +53,7 @@ public class Drone {
     public Drone() {
     }
 
-    public Drone(String serialNumber, DroneModel model, Integer weightLimit, Double batteryCapacity, DroneState state) {
+    public Drone(String serialNumber, DroneModel model, Double weightLimit, Double batteryCapacity, DroneState state) {
         this.serialNumber = serialNumber;
         this.model = model;
         this.weightLimit = weightLimit;

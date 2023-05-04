@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface DroneRepository extends JpaRepository<Drone, Long> {
     public List<Drone> findDronesByState(DroneState state);
+    public Drone findDroneBySerialNumber(String serialNumber);
 }
