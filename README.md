@@ -109,6 +109,16 @@ Some of the assumptions used in the project:
 - Drone weight limit should be between 1-500 grams
 - Drone battery capacity is between 0-100 % assuming it could be decimal like 98.8%
 
+### Available Unit Tests that can be used:
+
+- In DroneControllerTest:
+    - testRegisterDroneSuccess()
+    - testRegisterDroneFail()
+    - testGetAvailableDronesSuccess()
+- In DroneServiceTest:
+    - testSaveDrone()
+    - testGetAvailableDrones()
+  
 ### Testing using Postman
 
 - Open postman for testing purposes
@@ -116,9 +126,9 @@ Some of the assumptions used in the project:
 
 --------- 
 
-1- **Drone Registration API:**
+### 1- **Drone Registration API:**
 
-The api details:
+### - The api details:
 - url is: http://localhost:8082/api/v1/drones/registerDrone
 - It is a POST api.
 - Sample Successful Request:
@@ -151,7 +161,7 @@ The api details:
   ![Register A Drone Successfully](https://github.com/HanaaElJazzar/test-repo/blob/master/1-RegisterADrone.JPG)
 
 
-- **Validations Applied:**
+### - Validations Applied:
   - First of all, If you try to create two drones with same serialNumber, you will get an error with success = false
     - ![Register A Drone with already existing serialNumber](https://github.com/HanaaElJazzar/test-repo/blob/master/2-DuplicateDrone.JPG)
   - Second, you will get error messages as below if you tried to enter wrong model or state values for the Drone:
@@ -161,9 +171,103 @@ The api details:
 
     - ![Register A Drone with wrong weight limit not within range](https://github.com/HanaaElJazzar/test-repo/blob/master/wrong-validations.JPG)
 
+
 ------------------
 
-2- **Get List of Available for Loading Drones API:**
+### 2- **Get List of Available Drones for Loading API:**
 
-The api details:
-- url is:
+### - The api details:
+- url is: http://localhost:8082/api/v1/drones/getAvailableDrones
+- It is a GET api.
+- No Request Body
+- Sample Successful Response:
+  ```
+  {
+    "success": true,
+    "message": "Available drones retrieved successfully.",
+    "data": [
+        {
+            "id": 1,
+            "serialNumber": "DR1234567A",
+            "model": "Lightweight",
+            "weightLimit": 300.0,
+            "batteryCapacity": 50.0,
+            "state": "IDLE"
+        },
+        {
+            "id": 3,
+            "serialNumber": "DR1234567C",
+            "model": "Lightweight",
+            "weightLimit": 300.0,
+            "batteryCapacity": 50.0,
+            "state": "IDLE"
+        }
+    ],
+    "timestamp": "2023-05-04T21:31:36.5379539"
+}
+
+- Kindly check the below postman request with successful request and response:
+
+  ![Get Available Drones](https://github.com/HanaaElJazzar/test-repo/blob/master/ReturnedListOfAvailableDrones.JPG)
+
+
+### - Validations Applied:
+- Handle the case where list returned is empty, you will get an error with success = false
+    - ![No Drones Available - Returned Empty List](https://github.com/HanaaElJazzar/test-repo/blob/master/NoIdleDronesAvailable.JPG)
+- Handle Any Exceptions that might happen
+
+--------------------------------------
+
+### 3- **Load Drone with Medications:**
+
+### - The api details:
+- url is: http://localhost:8082/api/v1/drones/getAvailableDrones
+- It is a POST api.
+- Sample Successful Request:
+   ```
+  {
+  "success": true,
+  "message": "Available drones retrieved successfully.",
+  "data": [
+  {
+  "id": 1,
+  "serialNumber": "DR1234567A",
+  ],
+  "timestamp": "2023-05-04T21:31:36.5379539"
+  }
+
+- Sample Successful Response:
+  ```
+  {
+    "success": true,
+    "message": "Available drones retrieved successfully.",
+    "data": [
+        {
+            "id": 1,
+            "serialNumber": "DR1234567A",
+            "model": "Lightweight",
+            "weightLimit": 300.0,
+            "batteryCapacity": 50.0,
+            "state": "IDLE"
+        },
+        {
+            "id": 3,
+            "serialNumber": "DR1234567C",
+            "model": "Lightweight",
+            "weightLimit": 300.0,
+            "batteryCapacity": 50.0,
+            "state": "IDLE"
+        }
+    ],
+    "timestamp": "2023-05-04T21:31:36.5379539"
+}
+
+- Kindly check the below postman request with successful request and response:
+
+  ![Get Available Drones](https://github.com/HanaaElJazzar/test-repo/blob/master/ReturnedListOfAvailableDrones.JPG)
+
+
+### - Validations Applied:
+- Handle the case where list returned is empty, you will get an error with success = false
+    - ![No Drones Available - Returned Empty List](https://github.com/HanaaElJazzar/test-repo/blob/master/NoIdleDronesAvailable.JPG)
+- Handle Any Exceptions that might happen

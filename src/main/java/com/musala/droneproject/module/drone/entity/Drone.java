@@ -53,6 +53,15 @@ public class Drone {
     public Drone() {
     }
 
+    public Drone(Long id, String serialNumber, DroneModel model, Double weightLimit, Double batteryCapacity, DroneState state) {
+        this.id = id;
+        this.serialNumber = serialNumber;
+        this.model = model;
+        this.weightLimit = weightLimit;
+        this.batteryCapacity = batteryCapacity;
+        this.state = state;
+    }
+
     public Drone(String serialNumber, DroneModel model, Double weightLimit, Double batteryCapacity, DroneState state) {
         this.serialNumber = serialNumber;
         this.model = model;

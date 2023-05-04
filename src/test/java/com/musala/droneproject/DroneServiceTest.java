@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 /*
@@ -47,6 +50,29 @@ public class DroneServiceTest {
 
         // assert that the returned drone object is the same as the one passed as an argument
         Assertions.assertEquals(drone, savedDrone);
+    }
+
+    @Test
+    public void testGetAvailableDrones(){
+        //Create List of Mock sample Drone Data
+        List<Drone> drones = new ArrayList<>();
+        drones.add(new Drone(1L, "DR1234567A", DroneModel.Lightweight, 300.0, 76.0, DroneState.IDLE));
+        drones.add(new Drone(2L, "DR1234567B", DroneModel.Middleweight, 400.0, 13.0, DroneState.IDLE));
+        drones.add(new Drone(3L, "DR1234567C", DroneModel.Cruiserweight, 450.0, 90.8, DroneState.IDLE));
+
+        //Set up the mock repository to return the available drones
+        when(droneRepository.findByStateOrderByIdAsc(DroneState.IDLE)).thenReturn(drones);
+
+        //Call the service method
+        List<Drone> responseDrones = droneService.getAvailabeDrones();
+
+        //Verify the repository method was called
+        verify(droneRepository, times(1)).findByStateOrderByIdAsc(DroneState.IDLE);
+
+        //verify the correct drones are returned
+        Assertions.assertEquals(3, responseDrones.size());
+        Assertions.assertEquals(drones, responseDrones);
+        Assertions.assertTrue(responseDrones.stream().allMatch(d -> d.getState() == DroneState.IDLE));
     }
 
 }
