@@ -218,56 +218,36 @@ Some of the assumptions used in the project:
 
 --------------------------------------
 
-### 3- **Load Drone with Medications:**
+### 3- **Get Battery Level of a Drone:**
 
 ### - The api details:
-- url is: http://localhost:8082/api/v1/drones/getAvailableDrones
-- It is a POST api.
-- Sample Successful Request:
-   ```
-  {
-  "success": true,
-  "message": "Available drones retrieved successfully.",
-  "data": [
-  {
-  "id": 1,
-  "serialNumber": "DR1234567A",
-  ],
-  "timestamp": "2023-05-04T21:31:36.5379539"
-  }
+- url is: http://localhost:8082/api/v1/drones/getDroneBatteryCapacity
+- It is a GET api.
+  - Sample Successful Request:
+     ```
+    {
+      "serialNumber": "DR1234567C"
+    }
 
 - Sample Successful Response:
   ```
   {
     "success": true,
-    "message": "Available drones retrieved successfully.",
-    "data": [
-        {
-            "id": 1,
-            "serialNumber": "DR1234567A",
-            "model": "Lightweight",
-            "weightLimit": 300.0,
-            "batteryCapacity": 50.0,
-            "state": "IDLE"
-        },
-        {
-            "id": 3,
-            "serialNumber": "DR1234567C",
-            "model": "Lightweight",
-            "weightLimit": 300.0,
-            "batteryCapacity": 50.0,
-            "state": "IDLE"
-        }
-    ],
-    "timestamp": "2023-05-04T21:31:36.5379539"
-}
+    "message": "Battery Capacity Returned.",
+    "data": null,
+    "timestamp": "2023-05-05T00:39:13.0572976",
+    "batteryCapacity": 50.0
+  }
 
 - Kindly check the below postman request with successful request and response:
-
-  ![Get Available Drones](https://github.com/HanaaElJazzar/test-repo/blob/master/ReturnedListOfAvailableDrones.JPG)
-
+  ![Get Drone Battery Capacity](https://github.com/HanaaElJazzar/test-repo/blob/master/BatteryCapacityApi.JPG)
 
 ### - Validations Applied:
-- Handle the case where list returned is empty, you will get an error with success = false
-    - ![No Drones Available - Returned Empty List](https://github.com/HanaaElJazzar/test-repo/blob/master/NoIdleDronesAvailable.JPG)
+- Handle the case where the serialNumber is sent as empty, you will get an error with success = false
+    - ![serialNumber is missing Error](https://github.com/HanaaElJazzar/test-repo/blob/master/BatteryCapacityValidation2.JPG)
+- Handle the case where no Drone is found for such serialNumber, thus, return error with success = false
+    - ![serialNumber is missing Error](https://github.com/HanaaElJazzar/test-repo/blob/master/BatteryCapacityValidation1.JPG)      
 - Handle Any Exceptions that might happen
+
+
+-------------------------------------

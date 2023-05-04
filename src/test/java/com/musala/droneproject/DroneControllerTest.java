@@ -37,7 +37,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     Created on: 03/05/2023
     This will create DroneControllerTest That will test Controller Apis created to manage drones loading
  */
-
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -49,7 +48,11 @@ public class DroneControllerTest {
     @MockBean
     private DroneService droneService;
 
-    /* Test Successfully registering Drone */
+    /*
+        Test Successfully registering Drone
+        Added By: Hanaa ElJazzar
+        Date: 03/05/2023
+    */
     @Test
     public void testRegisterDroneSuccess() throws Exception {
         Drone drone = new Drone("serial123", DroneModel.Lightweight, 500.0, 100.0, DroneState.IDLE);
@@ -76,7 +79,11 @@ public class DroneControllerTest {
         verify(droneService, times(1)).saveDrone(any(Drone.class));
     }
 
-    /* Test Failed registeration of Drone by sending wrong betteryCapacity and weightLimit values */
+    /*
+        Test Failed registeration of Drone by sending wrong betteryCapacity and weightLimit values.
+        Added By: Hanaa ElJazzar
+        Date: 03/05/2023
+    */
     @Test
     public void testRegisterDroneFail() throws Exception {
         Drone drone = new Drone("serial123", DroneModel.Lightweight, 600.0, 200.0, DroneState.IDLE);
@@ -105,6 +112,11 @@ public class DroneControllerTest {
         verify(droneService, times(0)).saveDrone(any(Drone.class));
     }
 
+    /*
+        Test getAvailableDrones Controller Api.
+        Added By: Hanaa ElJazzar
+        Date: 04/05/2023
+     */
     @Test
     public void testGetAvailableDronesSuccess() throws Exception{
         //Create List of Drones
@@ -135,6 +147,29 @@ public class DroneControllerTest {
             Assertions.assertEquals(drones.get(i).getBatteryCapacity(), actualResponse.getData().get(i).getBatteryCapacity());
             Assertions.assertEquals(drones.get(i).getWeightLimit(), actualResponse.getData().get(i).getWeightLimit());
         }
-        System.out.println("");
+    }
+
+    /*
+        Test getBatteryCapacity Controller Api
+        Added By: Hanaa ElJazzar
+        Date: 04/05/2023
+     */
+    @Test
+    public void testGetBatteryCapacitySuccess() throws Exception{
+        //Sample Drone
+        Drone drone = new Drone("serial123", DroneModel.Lightweight, 300.0, 80.0, DroneState.IDLE);
+
+        //Create a MockService that returns BatteryCapacity
+        when(droneService.getBatteryCapacity("serial123")).thenReturn(drone.getBatteryCapacity());
+
+        mockMvc.perform(get("/api/v1/drones/getDroneBatteryCapacity")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success", is(true)))
+                .andExpect(jsonPath("$.batteryCapacity", is(drone.getBatteryCapacity())))
+                .andExpect(jsonPath("$.message", is("Battery Capacity Returned.")));
+
+        verify(droneService, times(1)).getBatteryCapacity("1234");
     }
 }
