@@ -106,13 +106,17 @@ Some of the assumptions used in the project:
 - Each medication can be loaded to only one drone
 - We can load more than one medication as long as their total weights is not exceeding the allowed drone weight.
 - The scheduled task runs every minute to check drones' batteries' life
+- Drone weight limit should be between 1-500 grams
+- Drone battery capacity is between 0-100 % assuming it could be decimal like 98.8%
 
 ### Testing using Postman
 
 - Open postman for testing purposes
 - Make sure the content-type in postman Headers is set to application/json
 
-**Drone Registration API:**
+--------- 
+
+1- **Drone Registration API:**
 
 The api details:
 - url is: http://localhost:8082/api/v1/drones/registerDrone
@@ -157,7 +161,9 @@ The api details:
 
     - ![Register A Drone with wrong weight limit not within range](https://github.com/HanaaElJazzar/test-repo/blob/master/wrong-validations.JPG)
 
-**Get List of Available for Loading Drones API:**
+------------------
+
+2- **Get List of Available for Loading Drones API:**
 
 The api details:
 - url is:
