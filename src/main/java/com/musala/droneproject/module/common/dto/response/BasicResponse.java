@@ -1,4 +1,4 @@
-package com.musala.droneproject.module.drone.dto.response;
+package com.musala.droneproject.module.common.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;

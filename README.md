@@ -108,6 +108,7 @@ Some of the assumptions used in the project:
 - The scheduled task runs every minute to check drones' batteries' life
 - Drone weight limit should be between 1-500 grams
 - Drone battery capacity is between 0-100 % assuming it could be decimal like 98.8%
+- Battery Monitor Event Scheduler will log the levels of Battery Capacity for the drones with less than 25% level every minute for all drone with different statuses assuming that a drone battery might deteriorate to less than 25% while delivering or even while returning from delivering medications.
 
 ### Available Unit Tests that can be used:
 
@@ -115,9 +116,13 @@ Some of the assumptions used in the project:
     - testRegisterDroneSuccess()
     - testRegisterDroneFail()
     - testGetAvailableDronesSuccess()
+    - testGetBatteryCapacitySuccess()
 - In DroneServiceTest:
     - testSaveDrone()
     - testGetAvailableDrones()
+    - testGetBatteryCapacity()
+- In DroneMonitorEventServiceTest:
+    - testDroneMonitorLogEvent()
   
 ### Testing using Postman
 
@@ -125,6 +130,15 @@ Some of the assumptions used in the project:
 - Make sure the content-type in postman Headers is set to application/json
 
 --------- 
+### Battery Monitor Log Scheduler:
+
+CheckDronesBatteryLevelsScheduler will run:
+- method checkDronesBatteryLevels every minute
+- log the levels of Battery Capacity for the drones with less than 25% every minute.
+- It is logging this under logType: BATTERY_MONITOR in table DRONE_MONITOR_EVENTS in database
+- Also, it is logging this on application console
+
+---------
 
 ### 1- **Drone Registration API:**
 

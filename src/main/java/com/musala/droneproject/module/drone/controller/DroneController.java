@@ -1,7 +1,7 @@
 package com.musala.droneproject.module.drone.controller;
 
 import com.musala.droneproject.module.drone.dto.request.DroneBatteryCapacityRequest;
-import com.musala.droneproject.module.drone.dto.response.BasicResponse;
+import com.musala.droneproject.module.common.dto.response.BasicResponse;
 import com.musala.droneproject.module.drone.dto.response.DroneBatteryResponse;
 import com.musala.droneproject.module.drone.entity.Drone;
 import com.musala.droneproject.module.drone.exception.DuplicateSerialNumberException;
@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.yaml.snakeyaml.representer.BaseRepresenter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
