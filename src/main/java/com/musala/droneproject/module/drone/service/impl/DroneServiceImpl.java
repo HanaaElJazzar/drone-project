@@ -59,4 +59,10 @@ public class DroneServiceImpl implements DroneService {
         return null;
     }
 
+    @Override
+    public List<Drone> getAllDrones() {
+        List<Drone> drones = droneRepository.findAll();
+        return drones;
+    }
+
 }

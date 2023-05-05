@@ -31,7 +31,19 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.8.0'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2'
+	//implementation 'log4j:log4j:2.17.1'
 }
+
+final def all = configurations.all {
+	resolutionStrategy.capabilitiesResolution.withCapability("log4j:log4j") {
+		def toBeSelected = candidates.find { it.id instanceof ModuleComponentIdentifier && it.id.module == 'log4j-over-slf4j' }
+		if (toBeSelected != null) {
+			select(toBeSelected)
+		}
+		because 'use slf4j in place of log4j'
+	}
+}
+all
 
 tasks.named('test') {
 	useJUnitPlatform()

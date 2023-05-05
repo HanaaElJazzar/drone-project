@@ -1,7 +1,7 @@
 package com.musala.droneproject.module.drone.exception;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.musala.droneproject.module.drone.dto.response.BasicResponse;
+import com.musala.droneproject.module.common.dto.response.BasicResponse;
 import com.musala.droneproject.module.drone.enums.DroneModel;
 import com.musala.droneproject.module.drone.enums.DroneState;
 import org.springframework.http.HttpStatus;
@@ -46,6 +46,12 @@ public class CustomMessageNotReadableException {
             } else if (fieldName.equals("model")) {
                 String validValues = Arrays.toString(DroneModel.values());
                 message = "Invalid drone model. Valid models are: " + validValues;
+            } else if (fieldName.equals(("logType"))){
+                // Added by: Hanaa on 05/05/2023
+                // Checking if LogType we are watching the events on is checked in requests too.
+                // Added to monitor drone performances with specific log type
+                String validValues = Arrays.toString(DroneState.values());
+                message = "Invalid Log Type. Valid log types are: " + validValues;
             }
 
             apiResponse.setMessage(message);

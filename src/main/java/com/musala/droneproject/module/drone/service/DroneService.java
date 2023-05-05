@@ -19,4 +19,6 @@ public interface DroneService {
     public List<Drone> getAvailabeDrones();
 
     public Double getBatteryCapacity(String serialNumber);
+
+    public List<Drone> getAllDrones();
 }

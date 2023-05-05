@@ -3,7 +3,7 @@ package com.musala.droneproject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.musala.droneproject.module.drone.dto.response.BasicResponse;
+import com.musala.droneproject.module.common.dto.response.BasicResponse;
 import com.musala.droneproject.module.drone.entity.Drone;
 import com.musala.droneproject.module.drone.enums.DroneModel;
 import com.musala.droneproject.module.drone.enums.DroneState;
@@ -17,11 +17,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
