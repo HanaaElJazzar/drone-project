@@ -43,7 +43,7 @@ public class DroneServiceTest {
         when(droneRepository.save(drone)).thenReturn(drone);
 
         // call the method being tested
-        Drone savedDrone = droneService.saveDrone(drone);
+        Drone savedDrone = droneService.saveNewDrone(drone);
 
         // verify that the mock repository was called with the correct arguments
         verify(droneRepository, times(1)).save(drone);
@@ -64,7 +64,7 @@ public class DroneServiceTest {
         when(droneRepository.findByStateOrderByIdAsc(DroneState.IDLE)).thenReturn(drones);
 
         //Call the service method
-        List<Drone> responseDrones = droneService.getAvailabeDrones();
+        List<Drone> responseDrones = droneService.getAvailableDrones();
 
         //Verify the repository method was called
         verify(droneRepository, times(1)).findByStateOrderByIdAsc(DroneState.IDLE);
@@ -96,4 +96,5 @@ public class DroneServiceTest {
         //Assert Results returned
         Assertions.assertEquals(drone.getBatteryCapacity(), actualBatteryCap);
     }
+
 }

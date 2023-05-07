@@ -2,6 +2,7 @@ package com.musala.droneproject.module.drone.entity;
 
 import com.musala.droneproject.module.drone.enums.DroneModel;
 import com.musala.droneproject.module.drone.enums.DroneState;
+import com.musala.droneproject.module.medication.entity.Medication;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -12,6 +13,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Index;
 
 import java.beans.ConstructorProperties;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
     Created by: Hanaa ElJazzar
@@ -37,7 +40,6 @@ public class Drone {
     @Enumerated(EnumType.STRING)
     private DroneModel model;
 
-//    @Min(0)
     @Min(value=1, message = "Weight limit must be at least 1 grams")
     @Max(value=500, message = "Weight limit cannot exceed 500 grams")
     private Double weightLimit;
@@ -49,6 +51,11 @@ public class Drone {
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Drone State cannot be null")
     private DroneState state;
+
+    //Added by Hanaa on 06/05/2023 to handle list of medications the drone can load and deliver at a time
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "drone_id", nullable = true)
+    private List<Medication> medications = new ArrayList<>();
 
     public Drone() {
     }
