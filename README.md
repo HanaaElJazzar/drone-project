@@ -74,7 +74,11 @@ While implementing, take care of the following requirements:
 1. Clone the project from GitHub:
 
     ```bash
-    git clone https://github.com/HanaaElJazzar/drone-project.git
+    cd /
+    git init
+    git remote add origin https://github.com/HanaaElJazzar/drone-project.git
+    git pull
+    git checkout main
     ```
 
 2. Navigate to the project directory:
