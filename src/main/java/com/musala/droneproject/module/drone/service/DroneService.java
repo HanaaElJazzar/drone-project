@@ -14,11 +14,18 @@ import java.util.List;
 @Component
 public interface DroneService {
 
-    public Drone saveDrone(Drone drone) throws DuplicateSerialNumberException;
+    public Drone saveNewDrone(Drone drone) throws DuplicateSerialNumberException;
 
-    public List<Drone> getAvailabeDrones();
+    public List<Drone> getAvailableDrones();
 
     public Double getBatteryCapacity(String serialNumber);
 
     public List<Drone> getAllDrones();
+
+    public Drone getDrone(String serialNumber);
+
+    public Drone updateDrone(Drone drone);
+
+    public Long getNumberOfDronesFleet();
+
 }
