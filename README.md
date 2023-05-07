@@ -95,7 +95,9 @@ While implementing, take care of the following requirements:
     - password:
     - url: jdbc:h2:mem:dronedb
    - ![Database Connection](https://github.com/HanaaElJazzar/test-repo/blob/master/dummyData/DatabaseConnect.JPG)
-
+8. You can find POSTMAN Collection used in Testing under directory to be downloaded and used:
+   - https://github.com/HanaaElJazzar/test-repo/tree/master/postmanCollectionDRProject 
+   
 ------------
 
 ## API Endpoints and Testing:
